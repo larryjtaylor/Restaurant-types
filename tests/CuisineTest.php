@@ -19,12 +19,25 @@
         //     Cuisine::deleteAll();
         // }
 
+        function testGetId()
+        {
+            //Arrange
+            $cuisine_type = 'Chinese';
+            $test_cuisine = new Cuisine($cuisine_type);
+            $test_cuisine->save();
+
+            //Act
+            $result = $test_cuisine->getId();
+
+            //Assert
+            $this->assertTrue(is_numeric($result));
+        }
+
         function testGetCuisineType()
         {
             // Arrange
             $cuisine_type = 'Chinese';
-            $description = 'Food from China';
-            $test_cuisine = new Cuisine ($cuisine_type, $description);
+            $test_cuisine = new Cuisine ($cuisine_type);
 
             // Act
             $result = $test_cuisine->getCuisineType();
@@ -33,19 +46,17 @@
             $this->assertEquals($cuisine_type, $result);
         }
 
-        function testGetDescription()
+        function testSave()
         {
-            // Arrange
-            $cuisine_type = 'Chinese';
-            $description = 'Food from China';
-            $test_cuisine = new Cuisine ($cuisine_type, $description);
+            //Arrange
+            $cuisine_type = 'chinese';
+
+            $test_cuisine = new Cuisine($cuisine_type);
             $test_cuisine->save();
-
-            // Act
-            $result = $test_cuisine->getDescription();
-
+            //Act
+            $executed = $test_cuisine->save();
             // Assert
-            $this->assertEquals($description, $result);
+            $this->assertTrue($executed, "Type not successfully saved to database");
         }
 
         // function testDeleteAll()
@@ -63,17 +74,7 @@
         //     $this->assertEquals([], $result);
         // }
 
-        // function testSave()
-        // {
-        //     //Arrange
-        //     $test_cuisine_type = 'chinese';
-        //     $test_description = 'Food from China';
-        //     $test_cuisine = new Cuisine($test_cuisine_type, $test_description);
-        //     //Act
-        //     $executed = $test_cuisine->save();
-        //     // Assert
-        //     $this->assertTrue($executed, "Item not successfully saved to database");
-        // }
+
 
     }
 

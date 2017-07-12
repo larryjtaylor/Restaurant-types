@@ -11,14 +11,14 @@
     $DB = new PDO($server, $username, $password);
 
 
-    // $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    //     'twig.path' => __DIR__.'/../views'
-    // ));
-    // $app->get("/", function() use ($app) {
-    //     return $app['twig']->render('index.html.twig');
-    // });
-    // $app->get("/doctors", function() use ($app) {
-    //     return $app['twig']->render('doctor.html.twig', array('doctors' => Doctor::getAll()));
-    // });
+    $app->register(new Silex\Provider\TwigServiceProvider(), array(
+        'twig.path' => __DIR__.'/../views'
+    ));
+    $app->get("/", function() use ($app) {
+        return $app['twig']->render('index.html.twig');
+    });
+    $app->get("/doctors", function() use ($app) {
+        return $app['twig']->render('doctor.html.twig', array('doctors' => Doctor::getAll()));
+    });
         return $app;
 ?>
