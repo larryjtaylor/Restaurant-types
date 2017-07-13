@@ -7,10 +7,10 @@
         private $id;
 
 
-        function __construct($cuisine_type, $neighborhood, $id = null)
+        function __construct($name, $neighborhood, $id = null)
         {
 
-            $this->cuisine_type = $cuisine_type;
+            $this->name = $name;
             $this->neighborhood = $neighborhood;
             $this->id = $id;
 
@@ -41,7 +41,6 @@
             return $this->id;
         }
 
-
         function save()
         {
             $executed = $GLOBALS['DB']->exec("INSERT INTO restaurant (name, neighborhood) VALUES ('{$this->getName()}', '{$this->getNeighborhood()}')");
@@ -59,28 +58,34 @@
             $restaurants = array();
             foreach($returned_restaurants as $restaurant) {
                 $name = $restaurant['name'];
-                $neighborhood = $restaurant['neighborhood']
+                $neighborhood = $restaurant['neighborhood'];
                 $id = $restaurant['id'];
                 $new_restaurant = new Restaurant($name, $neighborhood, $id);
-                array_push($restaurants, $new_restaurant);
+                array_push($restaurants, $new_restaurant, $id);
             }
-
-        function deleteAll()
-        {
-            $GLOBALS['DB']->exec("DELETE FROM restaurants;");
-        }
-
-        static function deleteSingle()
-        {
-            $executed = $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
-            if ($executed) {
-                return true;
-            } else {
-                return false;
-            }
-        }
             return $restaurants;
         }
 
+        // function deleteAll()
+        // {
+        //     $GLOBALS['DB']->exec("DELETE FROM restaurants;");
+        //     if ($executed) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
+
+        // static function deleteSingle()
+        // {
+        //     $executed = $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
+        //     if ($executed) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
+        //     return $restaurants;
+        // }
     }
 ?>

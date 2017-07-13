@@ -14,25 +14,6 @@
 
     class CuisineTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Cuisine::deleteAll();
-        // }
-
-        function testGetId()
-        {
-            //Arrange
-            $cuisine_type = 'Chinese';
-            $test_cuisine = new Cuisine($cuisine_type);
-            $test_cuisine->save();
-
-            //Act
-            $result = $test_cuisine->getId();
-
-            //Assert
-            $this->assertTrue(is_numeric($result));
-        }
-
         function testGetCuisineType()
         {
             // Arrange
@@ -59,23 +40,19 @@
             $this->assertTrue($executed, "Type not successfully saved to database");
         }
 
-        // function testDeleteAll()
-        // {
-        //     //Arrange
-        //     $test_cuisine_type = 'chinese';
-        //     $test_description = 'Food from China';
-        //     $test_cuisine = new Cuisine($test_cuisine_type, $test_description);
-        //     // $test_cuisine->save();
-        //
-        //     //Act
-        //     Cuisine::deleteAll();
-        //     //Assert
-        //     $result = Cuisine::deleteAll();
-        //     $this->assertEquals([], $result);
-        // }
+        function testDeleteAll()
+        {
+            //Arrange
+            $test_cuisine_type = 'chinese';
+            $test_cuisine = new Cuisine($test_cuisine_type);
+            $test_cuisine->save();
 
+            //Act
+            Cuisine::deleteAll();
+            $result = Cuisine::getAll();
 
-
+            //Assert
+            $this->assertEquals('', $result);
+        }
     }
-
 ?>

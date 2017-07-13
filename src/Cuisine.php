@@ -14,27 +14,25 @@
 
         }
 
-        function getCuisineType()
-        {
-            return $this->cuisine_type;
-        }
-
-        function setCuisineType($new_cuisine_type)
-        {
-            $this->cuisine_type = (string) $new_cuisine_type;
-        }
-
         function getId()
         {
             return $this->id;
         }
 
+        function getCuisineType()
+        {
+            return $this->cuisine_type;
+        }
+
+        function setCuisineType($cuisine_type)
+        {
+            $this->cuisine_type = (string) $cuisine_type;
+        }
 
         function save()
         {
             $executed = $GLOBALS['DB']->exec("INSERT INTO cuisines (cuisine_type) VALUES ('{$this->getCuisineType()}')");
             if ($executed) {
-                $this->id = $GLOBALS['DB']->lastInsertId();
                 return true;
             } else {
                 return false;
@@ -51,44 +49,16 @@
                 $new_cuisine = new Cuisine($cuisine_type, $id);
                 array_push($cuisines, $new_cuisine);
             }
-
-        function deleteAll()
-        {
-            $GLOBALS['DB']->exec("DELETE FROM cuisines;");
         }
 
-        static function deleteSingle()
+        static function deleteAll()
         {
-            $executed = $GLOBALS['DB']->exec("DELETE FROM cuisines WHERE id = {$this->getId()};");
+            $executed = $GLOBALS['DB']->exec("DELETE FROM cuisines;");
             if ($executed) {
                 return true;
             } else {
                 return false;
             }
         }
-            return $cuisines;
-        }
-
     }
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
